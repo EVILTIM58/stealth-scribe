@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+build/
+dist/
+.vite/
+
+# Worker secrets -- never commit these
+worker/stealthscribe-worker.json
+*.local.json
+
+# Logo images are generated from the committed *.b64 files at build time
+frontend/public/*.webp
+frontend/public/*.png
+
+# Local media / scratch
+media/
+tmp/
+*.mp3
+*.wav
+*.m4a
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
