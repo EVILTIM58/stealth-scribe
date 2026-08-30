@@ -618,6 +618,7 @@ code {
 .seg { cursor: pointer; }
 .seg:hover { background: rgba(76, 201, 240, .12); }
 .seg.current { background: rgba(31, 143, 255, .26); color: #fff; box-shadow: 0 0 12px rgba(31,143,255,.28); }
+
 .who {
   font-weight: 700; font-size: 11.5px; text-transform: uppercase;
   letter-spacing: .16em; font-family: var(--mono);
