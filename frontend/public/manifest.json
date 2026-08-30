@@ -1,0 +1,15 @@
+{
+  "short_name": "Stealth-Scribe",
+  "name": "Stealth-Scribe v1.0.2 - Smart Transcription",
+  "description": "Audio in. Transcribe to English. Save as PDF.",
+  "icons": [
+    { "src": "/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/favicon.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "120x120", "type": "image/png" },
+    { "src": "/ss-mark.webp", "sizes": "256x256", "type": "image/webp", "purpose": "any" }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#04060c",
+  "background_color": "#04060c"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "stealthscribe-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "predev": "node scripts/decode-assets.mjs",
+    "dev": "vite",
+    "prebuild": "node scripts/decode-assets.mjs",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  }
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#04060c" />
+    <meta name="description" content="Stealth-Scribe - Audio in. Transcribe to English. Save as PDF. Private audio transcription with speaker labels, running on your own hardware." />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>Stealth-Scribe v1.0.2 - Audio in. Transcribe to English. Save as PDF.</title>
+    <style>
+      /* Painted before React mounts so the first frame is on-brand, not white. */
+      html, body { margin: 0; background: #04060c; }
+      #boot { position: fixed; inset: 0; display: grid; place-items: center; }
+      #boot img { width: 96px; border-radius: 18px; animation: bpulse 1.8s ease-in-out infinite; }
+      @keyframes bpulse { 0%, 100% { opacity: .4 } 50% { opacity: 1 } }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="boot"><img src="/ss-mark.webp" alt="Stealth-Scribe" /></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.addEventListener('load', function () {
+        var b = document.getElementById('boot')
+        if (b) setTimeout(function () { b.remove() }, 200)
+      })
+    </script>
+  </body>
+</html>

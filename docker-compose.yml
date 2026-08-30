@@ -1,0 +1,96 @@
+name: stealthscribe
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: stealthscribe-mongo
+    restart: unless-stopped
+    volumes:
+      - stealthscribe_mongo:/data/db
+    networks: [stealthscribe_net]
+
+  backend:
+    image: ghcr.io/eviltim58/stealthscribe-backend:latest
+    container_name: stealthscribe-backend
+    restart: unless-stopped
+    environment:
+      MONGO_URL: "mongodb://mongo:27017"
+      DB_NAME: "stealthscribe"
+      MEDIA_DIR: "/data/media"
+      TMP_DIR: "/data/tmp"
+      APP_VERSION: "1.0.2"
+
+      # ---- identity -----------------------------------------------------
+      # MUST be the exact public URL. Every OAuth callback, email link and
+      # cookie-security decision derives from it. Wrong value = broken sign-in.
+      SITE_BASE_URL: "https://stealth-scribe.com"
+      SITE_NAME: "Stealth-Scribe"
+
+      # The hardcoded owner. Always GOD, cannot be demoted or deleted.
+      GOD_EMAIL: "eviltim@gmail.com"
+
+      # CHANGE THIS. Mixed into session hashes; changing it logs everyone out.
+      TOKEN_PEPPER: "change-me-to-a-long-random-string"
+
+      # ---- worker -------------------------------------------------------
+      # CHANGE THIS -- the worker on your PC must use the same value.
+      WORKER_TOKEN: "change-me-to-something-long"
+
+      # ---- sign-in providers (leave blank to hide the button) ------------
+      GOOGLE_CLIENT_ID: ""
+      GOOGLE_CLIENT_SECRET: ""
+      FACEBOOK_APP_ID: ""
+      FACEBOOK_APP_SECRET: ""
+
+      # ---- email (Resend) ------------------------------------------------
+      # Without this, confirmation links are printed to the container log
+      # instead of emailed. Fine for testing, not for real users.
+      RESEND_API_KEY: ""
+      MAIL_FROM: "Stealth-Scribe <noreply@stealth-scribe.com>"
+      CONTACT_EMAIL: "contact@stealth-scribe.com"
+      LEGAL_EMAIL: "legal@stealth-scribe.com"
+      DMCA_EMAIL: "dmca@stealth-scribe.com"
+      JURISDICTION: "the State of Texas, United States"
+
+      # ---- accounts ------------------------------------------------------
+      ALLOW_SIGNUP: "1"
+      # Minutes of audio a standard user may queue per rolling 24h.
+      # Transcription runs on YOUR GPU -- 0 disables the cap entirely.
+      DAILY_MINUTES_QUOTA: "180"
+      MAX_RECORDINGS_PER_USER: "0"
+
+      # ---- voice recognition ---------------------------------------------
+      # Cosine similarity thresholds against a saved voiceprint. Raise AUTO if
+      # you ever see a wrong name applied automatically; lower it if you keep
+      # confirming the same person. Needs the worker's Hugging Face token --
+      # without it the built-in detector is too weak to identify people and
+      # will only ever suggest, never decide.
+      VOICEID_AUTO: "0.75"
+      VOICEID_SUGGEST: "0.58"
+
+      # Audio, .txt and .pdf are written side by side in the media folder, so
+      # every transcript survives independently of this app.
+      WRITE_TXT_SIDECAR: "1"
+      WRITE_PDF_SIDECAR: "1"
+    volumes:
+      # Recordings and their .txt transcripts, as normal browsable files.
+      - /volume1/docker/stealthscribe/media:/data/media
+      - /volume1/docker/stealthscribe/tmp:/data/tmp
+    depends_on: [mongo]
+    networks: [stealthscribe_net]
+
+  frontend:
+    image: ghcr.io/eviltim58/stealthscribe-frontend:latest
+    container_name: stealthscribe-frontend
+    restart: unless-stopped
+    ports:
+      - "8458:80"
+    depends_on: [backend]
+    networks: [stealthscribe_net]
+
+networks:
+  stealthscribe_net:
+    driver: bridge
+
+volumes:
+  stealthscribe_mongo:
