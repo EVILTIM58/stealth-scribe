@@ -32,7 +32,7 @@ function NukeDialog({ onCancel, onDone }) {
           <strong>NUKED FILES CANNOT BE RETRIEVED.</strong>
           <p>
             This permanently deletes every recording on your account and
-            everything made from it &mdash; the audio or video file, the transcript,
+            everything made from it — the audio or video file, the transcript,
             any translation, the PDF and the plain text. There is no archive,
             no recycle bin and no backup to restore from.
           </p>
