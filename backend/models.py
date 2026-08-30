@@ -134,6 +134,16 @@ class ConfirmIn(Strict):
     accept: bool = True
 
 
+class BanIn(Strict):
+    """Suspend an account. The duration is mandatory -- see api_admin.ban_user.
+
+    Keys come from auth.BAN_DURATIONS: 1d, 3d, 1w, 1m, permanent.
+    """
+
+    duration: str
+    reason: str = ""
+
+
 class NukeIn(Strict):
     """Irreversible bulk deletion of the caller's own data."""
 
