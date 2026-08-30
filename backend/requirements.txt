@@ -1,0 +1,15 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+motor==3.6.0
+pymongo==4.9.2
+pydantic==2.10.4
+python-multipart==0.0.20
+
+# PDF generation. All pure Python -- nothing here compiles.
+#   fpdf2           builds the PDF and embeds a Unicode TrueType font
+#   arabic-reshaper joins Arabic letters into their positional forms
+#   python-bidi     reorders right-to-left text for a renderer that does no
+#                   layout of its own
+fpdf2==2.8.2
+arabic-reshaper==3.0.0
+python-bidi==0.6.3
