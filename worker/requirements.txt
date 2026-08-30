@@ -1,0 +1,6 @@
+# Installed by setup_worker_windows.bat -- torch is installed separately there
+# so the right CUDA build is picked for your GPU.
+faster-whisper>=1.0.3
+numpy>=1.24
+requests>=2.31
+pyannote.audio>=3.1.1
